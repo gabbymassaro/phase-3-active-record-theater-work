@@ -15,7 +15,7 @@ class Role < ActiveRecord::Base
   end
 
   def understudy
-    audition = auditions.where(hired: true).offset(1).first
+    audition = auditions.where(hired: true).second
     audition || 'no actor has been hired for understudy for this role'
   end
 end
