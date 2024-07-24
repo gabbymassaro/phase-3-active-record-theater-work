@@ -15,3 +15,4 @@ puts "🌱 Creating auditions..."
 Audition.create(actor: actor1, location: "Ireland", hired: false, role: role1)
 Audition.create(actor: actor2, location: "New York", hired: false, role: role1)
 Audition.create(actor: actor3, location: "UK", hired: false, role: role2)
+Audition.create(actor: actor1, location: "Ireland", hired: false, role: role2)
