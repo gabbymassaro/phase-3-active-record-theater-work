@@ -1,4 +1,4 @@
-# Practice Code Challenge Theater Work 
+# Practice Code Challenge Theater Work
 
 ## Learning Goals
 
@@ -11,54 +11,66 @@
 
 The Flatiron Theater Company is holding Auditions!
 
-An actor may only `Audition` for one `Role`, while a `Role` may have many `Auditions` for it! 
-
-![one to many](https://curriculum-content.s3.amazonaws.com/phase-3/active-record-theater-work/one_to_many.png)
-
-## Getting started 
+## Getting started
 
 run `bundle install`
 
-## Migrations 
+## Migrations
 
-Create your migrations. 
+Create your migrations.
 
-- `Auditions` should have an actor(string), location(string) and belong_to a role(integer)
+- **Auditions** should have a `location` (string) and `belong_to` a `role` (integer)
+- **Roles** should only have a `character_name` (string)
+- **Actors** should have a `name` (string) and a `phone` (integer)
 
-- `Roles` should only have a character_name
+### Auditions Table
 
-#### `auditions` Table
+| Column   | Type    |
+| -------- | ------- |
+| location | string  |
+| hired    | boolean |
+| role_id  | integer |
+| actor_id | integer |
 
-| Column | Type |
-| --- | --- |
-| actor | string |
-| location | string |
-| phone | integer |
-| hired | boolean |
-| role_id | integer |
+### Roles Table
 
-#### `roles` Table
-
-| Column | Type |
-| --- | --- |
+| Column         | Type   |
+| -------------- | ------ |
 | character_name | string |
-  
+
+### Actors Table
+
+| Column | Type    |
+| ------ | ------- |
+| name   | string  |
+| phone  | integer |
+
 ## Relationship
 
 - What associations will this need?
-- (i.e. `has_many`, `has_many through`, and `belongs_to`)
+  - (i.e. `has_many`, `has_many through`, and `belongs_to`)
 
 ## Audition
 
 - `Audition#role` returns an instance of role associated with this audition
-- `Audition#call_back` will change the the hired attribute to `true`
+- `Audition#actor` returns an instance of actor associated with this audition
+- `Audition#call_back` will change the hired attribute to `true`
+- `Audition.hired` returns all auditions where the hired attribute is `true`
+- `Audition.not_hired` returns all auditions where the hired attribute is `false`
 
 ## Roles
 
-- `Role#auditions` returns all of the auditions associated with this role 
+- `Role#auditions` returns all of the auditions associated with this role
 - `Role#actors` returns an array of names from the actors associated with this role
 - `Role#locations` returns an array of locations from the auditions associated with this role
 - `Role#lead` returns the first instance of the audition that was hired for this role or returns a string 'no actor has been hired for this role'
 - `Role#understudy` returns the second instance of the audition that was hired for this role or returns a string 'no actor has been hired for understudy for this role'
+- `Role.most_auditions` returns the role with the highest number of auditions
+- `Role.all_actors` returns a unique list of all actors who have auditioned for any role
 
+## Actors
 
+- `Actor#auditions` returns all of the auditions associated with this actor
+- `Actor#roles` returns an array of roles associated with this actor
+- `Actor.most_roles` returns the actor who has auditioned for the most roles
+- `Actor.hired_roles` returns all roles for which the actor has been hired
