@@ -8,7 +8,7 @@ class Actor < ActiveRecord::Base
   end
 
   def self.hired_roles
-    hired_actors = Audition.where(hired: true).pluck(:actor_id)
-    find(hired_actors)
+    hired_role_ids = Audition.where(hired: true).pluck(:role_id)
+    Role.where(id: hired_role_ids)
   end
 end
